@@ -1,88 +1,172 @@
 #include<iostream>
+#include<iomanip>
 #include<conio.h>
 #include<windows.h>
 using namespace std;
+
 void header();
 int menu();
-string fromthecity();
-string tocity(string departurecity);
-string seattype();
-string foodfacility();
-float ticketprice(string departurecity,string arrivalcity,string tickettype,string foodfacility);
-float foodprice(float ticketprice,string foodfacility);
-float total(float ticketprice,float foodprice);
-void ticketsdetails(string name,string departurecity,string arrivalcity,string tickettype,string foodfacility,float ticketprice,float foodprice,float totalticketprice);
+string FromCity(); 
+string ToCity(string departurecity); 
+string SeatType();
+string FoodFacility();
+float TicketPrice(string departurecity, string arrivalcity, string tickettype, string foodfacility);
+float FoodPrice(float ticketprice, string foodfacility);
+float Total(float ticketprice, float foodprice);
+void TicketsDetails(string name, string departurecity, string arrivalcity, string tickettype, string foodfacility, float ticketprice, float foodprice, float totalticketprice);
+
 main()
 {
     int option;
-    string Name1="",Name2="",Name3="";
-    string departurecity1="",departurecity2="",departurecity3="";
-    string arrivalcity1="",arrivalcity2="",arrivalcity3="";
-    string tickettype1="",tickettype2="",tickettype3="";
-    float ticketprice1=0.0,ticketprice2=0.0,ticketprice3=0.0;
-    string foodfacility1="",foodfacility2="",foodfacility3="";
-    float foodprice1=0.0,foodprice2=0.0,foodprice3=0.0;
-    float totalticketprice1=0.0,totalticketprice2=0.0,totalticketprice3=0.0;
+
+    string Name_of_person1 = "",
+    Name_of_person2 = "",
+    Name_of_person3 = "";
+
+    string departure_city_of_person_1 = "",
+    departure_city_of_person_2 = "",
+    departure_city_of_person_3 = "";
+
+    string arrival_city_of_person_1 = "",
+    arrival_city_of_person_2 = "",
+    arrival_city_of_person_3 = "";
+
+    string ticket_type_of_person_1 = "",
+    ticket_type_of_person_2 = "",
+    ticket_type_of_person_3 = "";
+
+    float ticketprice1 = 0.0,
+    ticketprice2 = 0.0,
+    ticketprice3 = 0.0;
+
+    string foodfacility1="",
+    foodfacility2="",
+    foodfacility3="";
+
+    float foodprice1=0.0,
+    foodprice2=0.0,
+    foodprice3=0.0;
+
+    float totalticketprice1=0.0,
+    totalticketprice2=0.0,
+    totalticketprice3=0.0;
+
     while(true)
     {
         header();
         option=menu();
+
         if(option==1)
         {
             cout << "Enter the name of 1st Person: " ;
-            cin >> Name1;
-            departurecity1=fromthecity();
-            cout << "Departure Station City: " << departurecity1 << endl;
-            arrivalcity1=tocity(departurecity1);
-            cout << "Arrival Station City: " << arrivalcity1 << endl;
-            tickettype1=seattype();
-            cout << "Ticket type: " << tickettype1 << endl;
-            foodfacility1=foodfacility();
+            cin >> Name_of_person1;
+
+            departure_city_of_person_1=FromCity();
+            cout << "Departure Station City: " << departure_city_of_person_1 << endl;
+
+            arrival_city_of_person_1=ToCity(departure_city_of_person_1);
+            cout << "Arrival Station City: " << arrival_city_of_person_1 << endl;
+
+            ticket_type_of_person_1=SeatType();
+            cout << "Ticket type: " << ticket_type_of_person_1 << endl;
+
+            foodfacility1=FoodFacility();
             cout << "Food facility: " << foodfacility1 << endl ;
-            ticketprice1=ticketprice(departurecity1,arrivalcity1,tickettype1,foodfacility1);
+
+            ticketprice1=TicketPrice(departure_city_of_person_1, arrival_city_of_person_1, ticket_type_of_person_1, foodfacility1);
             cout << "Ticket Price is: Rs." << ticketprice1 << endl ;
-            foodprice1=foodprice(ticketprice1,foodfacility1);
+
+            foodprice1=FoodPrice(ticketprice1, foodfacility1);
             cout << "Food price: Rs." << foodprice1 << endl ;
-            totalticketprice1=total(ticketprice1,foodprice1);
+
+            totalticketprice1=Total(ticketprice1, foodprice1);
             cout << "Total Ticket Price: " << totalticketprice1 << endl ;
+
+            if(arrival_city_of_person_1=="N.A")
+            {
+                Name_of_person1="N.A";
+                departure_city_of_person_1="N.A";
+                ticket_type_of_person_1="N.A";
+                foodfacility1="N.A";
+                foodprice1=0.0;
+                totalticketprice1=0.0;
+                ticketprice1=0.0;
+            }
         }
         if(option==2)
         {
             cout << "Enter the name of 2nd Person: " ;
-            cin >> Name2;
-            departurecity2=fromthecity();
-            cout << "Departure City: " << departurecity2 << endl;
-            arrivalcity2=tocity(departurecity2);
-            cout << "Arrival City: " << arrivalcity2 << endl;
-            tickettype2=seattype();
-            cout << "Ticket type: " << tickettype2 << endl;
-            foodfacility2=foodfacility();
+            cin >> Name_of_person2;
+
+            departure_city_of_person_2=FromCity();
+            cout << "Departure City: " << departure_city_of_person_2 << endl;
+
+            arrival_city_of_person_2=ToCity(departure_city_of_person_2);
+            cout << "Arrival City: " << arrival_city_of_person_2 << endl;
+
+            ticket_type_of_person_2=SeatType();
+            cout << "Ticket type: " << ticket_type_of_person_2 << endl;
+
+            foodfacility2=FoodFacility();
             cout << "Food facility: " << foodfacility2 << endl ;
-            ticketprice2=ticketprice(departurecity2,arrivalcity2,tickettype2,foodfacility2);
+
+            ticketprice2=TicketPrice(departure_city_of_person_2,arrival_city_of_person_2,ticket_type_of_person_2,foodfacility2);
             cout << "Ticket Price is: Rs." << ticketprice2 << endl ;
-            foodprice2=foodprice(ticketprice2,foodfacility2);
+
+            foodprice2=FoodPrice(ticketprice2,foodfacility2);
             cout << "Food price: Rs." << foodprice2 << endl ;
-            totalticketprice2=total(ticketprice2,foodprice2);
+
+            totalticketprice2=Total(ticketprice2,foodprice2);
             cout << "Total Ticket Price: " << totalticketprice2 << endl ;
+
+            if(arrival_city_of_person_2=="N.A")
+            {
+                Name_of_person2="N.A";
+                departure_city_of_person_2="N.A";
+                ticket_type_of_person_2="N.A";
+                foodfacility2="N.A";
+                foodprice2=0.0;
+                totalticketprice2=0.0;
+                ticketprice2=0.0;
+            }
+
         }
         if(option==3)
         {
             cout << "Enter the name of 3rd Person: " ;
-            cin >> Name3;
-            departurecity3=fromthecity();
-            cout << "Departure City: " << departurecity3 << endl;
-            arrivalcity3=tocity(departurecity3);
-            cout << "Arrival City: " << arrivalcity3 << endl;
-            tickettype3=seattype();
-            cout << "Ticket type: " << tickettype3 << endl;
-            foodfacility3=foodfacility();
+            cin >> Name_of_person3;
+
+            departure_city_of_person_3=FromCity();
+            cout << "Departure City: " << departure_city_of_person_3 << endl;
+
+            arrival_city_of_person_3=ToCity(departure_city_of_person_3);
+            cout << "Arrival City: " << arrival_city_of_person_3 << endl;
+
+            ticket_type_of_person_3=SeatType();
+            cout << "Ticket type: " << ticket_type_of_person_3 << endl;
+
+            foodfacility3=FoodFacility();
             cout << "Food facility: " << foodfacility3 << endl ;
-            ticketprice3=ticketprice(departurecity3,arrivalcity3,tickettype3,foodfacility3);
+
+            ticketprice3=TicketPrice(departure_city_of_person_3,arrival_city_of_person_3,ticket_type_of_person_3,foodfacility3);
             cout << "Ticket Price is: Rs." << ticketprice3 << endl ;
-            foodprice3=foodprice(ticketprice3,foodfacility3);
+
+            foodprice3=FoodPrice(ticketprice3,foodfacility3);
             cout << "Food price: Rs." << foodprice3 << endl ;
-            totalticketprice3=total(ticketprice1,foodprice3);
+
+            totalticketprice3=Total(ticketprice3,foodprice3);
             cout << "Total Ticket Price: " << totalticketprice3 << endl ;
+            
+            if(arrival_city_of_person_3=="N.A")
+            {
+                departure_city_of_person_3="N.A";
+                ticket_type_of_person_3="N.A";
+                foodfacility3="N.A";
+                foodprice3=0.0;
+                totalticketprice3=0.0;
+                ticketprice3=0.0;
+            }
+
         }
         if(option==4)
         {
@@ -92,18 +176,21 @@ main()
         if(option==5)
         {
             cout << "All booked ticket details: " << endl ;
-            cout << "Name" << "\t" << "Departure" << "\t" << "Arrival" << "\t" << "Ticket Type" << "\t" << "Food" << "\t" << "TktPrice" << "\t" << "FoodPrice" << "\t" << "Total Price" << endl;
-            ticketsdetails(Name1,departurecity1,arrivalcity1,tickettype1,foodfacility1,ticketprice1,foodprice1,totalticketprice1);
-            ticketsdetails(Name2,departurecity2,arrivalcity2,tickettype2,foodfacility2,ticketprice2,foodprice2,totalticketprice2);
-            ticketsdetails(Name3,departurecity3,arrivalcity3,tickettype3,foodfacility3,ticketprice3,foodprice3,totalticketprice3);
+            cout << setfill(' ') << setw(15) << left << "Name" << "\t" << setfill(' ') << setw(15) << left << "Departure City" << "\t" << setfill(' ') << setw(15) << left << "Arrival City" << "\t" << setfill(' ') << setw(15) << left << "Ticket Type" << "\t" << setfill(' ') << setw(15) << left << "Food Facility" << "\t" << setfill(' ') << setw(15) << left << "Ticket Price" << "\t" << setfill(' ') << setw(15) << left << "Food Price" << "\t" << setfill(' ') << setw(15) << left << "Total Ticket Price" << endl;
+        
+            TicketsDetails(Name_of_person1, departure_city_of_person_1, arrival_city_of_person_1, ticket_type_of_person_1, foodfacility1, ticketprice1, foodprice1, totalticketprice1);
+            TicketsDetails(Name_of_person2, departure_city_of_person_2, arrival_city_of_person_2, ticket_type_of_person_2, foodfacility2, ticketprice2, foodprice2, totalticketprice2);
+            TicketsDetails(Name_of_person3, departure_city_of_person_3, arrival_city_of_person_3, ticket_type_of_person_3, foodfacility3, ticketprice3, foodprice3, totalticketprice3);
         }
         if(option==6)
         {
             return 0;
         }
+
         cout << "Press any key to continue..." ;
         getch();
         system("cls");
+
     }
 }
 void header()
@@ -122,14 +209,14 @@ int menu()
     cout << "1.Enter the details of 1st Person ticket... " << endl ;
     cout << "2.Enter the details of 2nd Person ticket... " << endl ;
     cout << "3.Enter the details of 3rd Person ticket... " << endl ;
-    cout << "4.Calculate the total revenue... " << endl ;
+    cout << "4.Calculate the Total revenue... " << endl ;
     cout << "5.Display the details of all booked tickets... " << endl ;
     cout << "6.Exit..." << endl ;
     cout << "Your option..." ;
     cin >> option ;
     return option;
 }
-string fromthecity()
+string FromCity()
 {
     string departurecity="";
     cout << "Select the departure city: " << endl << "1.Lahore" << endl << "2.Karachi" << endl << "3.Islamabad" << endl << "Your option." ;
@@ -149,7 +236,7 @@ string fromthecity()
     } 
     return departurecity;
 }
-string tocity(string departurecity)
+string ToCity(string departurecity)
 {
     string arrivalcity="";
     cout << "Select the arrival city: " << endl << "1.Lahore" << endl << "2.Karachi" << endl << "3.Islamabad" << endl << "Note: Departure and arrival city should not be same!" << endl << "Your option.";
@@ -166,10 +253,53 @@ string tocity(string departurecity)
     if(option==3)
     {
         arrivalcity="Islamabad";
-    } 
+    }
+    
+    int x=1;
+    while (departurecity==arrivalcity)
+    {
+        if(x<=3)
+        {
+            cout << "Departure and Arrival cities cannot be same!" << endl << "Select the city again: ";
+            cin >> option;
+            if(option==1)
+            {   
+                arrivalcity="Lahore";
+            }
+            if(option==2)
+            {
+                arrivalcity="Karachi";
+            }
+            if(option==3)
+            {
+                arrivalcity="Islamabad";
+            } 
+        }
+        if(departurecity==arrivalcity)
+        {
+            if(x==1)
+            {
+                cout << "You have " << 3-x << " attempts left!" << endl;
+            }
+            if(x==2)
+            {
+                cout << "You have " << 3-x << " attempts left!" << endl ;
+            }
+            if(x==3) 
+            {
+                cout << "Sorry service not available!" << endl;
+            }
+        }
+        if(x==4)
+        {
+            arrivalcity="N.A";
+        }
+        x=x+1;
+    }
+    
     return arrivalcity;
 }
-string seattype()
+string SeatType()
 {
     int option;
     string tickettype;
@@ -185,7 +315,7 @@ string seattype()
     }
     return tickettype;
 }
-string foodfacility()
+string FoodFacility()
 {
     int option;
     cout << "Need food faility: " << endl << "1.Yes " << endl << "2.No" << endl << "Note:Food facility will cost 10% extra on ticket price!" << endl << "Your option." ;
@@ -199,35 +329,20 @@ string foodfacility()
         return "No" ;
     }
 }
-float ticketprice(string departurecity,string arrivalcity,string tickettype,string foodfacility)
+float TicketPrice(string departurecity,string arrivalcity,string tickettype,string FoodFacility)
 {
     float price;
-    if(departurecity=="Lahore")
-    if(arrivalcity=="Karachi")
+    if((departurecity=="Lahore" && arrivalcity=="Karachi") || (departurecity=="Karachi" && arrivalcity=="Lahore"))
     {
-        price=1500; 
+        price=3000;
     }
-    if(arrivalcity=="Islamabad")
+    if((departurecity=="Karachi" && arrivalcity=="Islamabad") || (departurecity=="Islamabad" && arrivalcity=="Karachi"))
     {
-        price=1200;
+        price=5000;
     }
-    if(departurecity=="Karachi")
-    if(arrivalcity=="Lahore")
+    if((departurecity=="Lahore" && arrivalcity=="Islamabad") || (departurecity=="Islamabad" && arrivalcity=="Lahore"))
     {
-        price=1500; 
-    }
-    if(arrivalcity=="Islamabad")
-    {
-        price=2700;
-    }
-    if(departurecity=="Islamabad")
-    if(arrivalcity=="Karachi")
-    {
-        price=2700; 
-    }
-    if(arrivalcity=="Lahore")
-    {
-        price=1200;
+        price=2000; 
     }
     if(tickettype=="Business class")
     {
@@ -235,21 +350,21 @@ float ticketprice(string departurecity,string arrivalcity,string tickettype,stri
     }
     return price;
 }
-float foodprice(float ticketprice,string foodfacility)
+float FoodPrice(float TicketPrice,string FoodFacility)
 {
     float fprice=0.0;
-    if(foodfacility=="Yes")
+    if(FoodFacility=="Yes")
     {
-        fprice=ticketprice*10/100;
+        fprice=TicketPrice*10/100;
     }
     return fprice;
 }
-float total(float ticketprice,float foodprice)
+float Total(float TicketPrice,float FoodPrice)
 {
-    float totalticketprice=ticketprice+foodprice;
+    float totalticketprice=TicketPrice+FoodPrice;
     return totalticketprice;
 }
-void ticketsdetails(string name,string departurecity,string arrivalcity,string tickettype,string foodfacility,float ticketprice,float foodprice,float totalticketprice)
+void TicketsDetails(string name,string departurecity,string arrivalcity,string tickettype,string FoodFacility,float TicketPrice,float FoodPrice,float totalticketprice)
 {
-    cout << name << " \t" <<departurecity<< "\t" << arrivalcity << " \t" << tickettype << "\t" << foodfacility << "\t " << ticketprice << "\t "<< foodprice << "\t " << totalticketprice << endl;
+    cout << setfill(' ') << setw(15) << name << "\t" << setfill(' ') << setw(15) << left << departurecity << "\t" << setfill(' ') << setw(15) << left  << arrivalcity << "\t" << setfill(' ') << setw(15) << left << tickettype << "\t" << setfill(' ') << setw(15) << left << FoodFacility << "\t" << setfill(' ') << setw(15) << left  << TicketPrice << "\t" << setfill(' ') << setw(15) << left << FoodPrice << "\t" << setfill(' ') << setw(15) << left << totalticketprice << endl;
 }
